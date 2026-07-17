@@ -10,28 +10,33 @@
     <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet" />
     <style>
-        /* ===== CSS-ПЕРЕМЕННЫЕ ===== */
+        /* ============================================================
+           CSS-ПЕРЕМЕННЫЕ (премиум-палитра)
+           ============================================================ */
         :root {
             --color-bg: #fcf9f2;
-            --color-bg-alt: #f0f5ec;
-            --color-text-primary: #1a3a2a;
-            --color-text-secondary: #4d6a5e;
-            --color-accent: #c17a4f;
-            --color-accent-hover: #a8653e;
-            --color-sage: #9bbf8f;
-            --color-border: #e8e0d6;
+            --color-bg-alt: #f6f1e9;
+            --color-text-primary: #1a2e1f;
+            --color-text-secondary: #5a6b5a;
+            --color-gold: #c89b6b;
+            --color-gold-light: #e8d5b5;
+            --color-gold-dark: #a87d4e;
+            --color-green-deep: #1a3a2a;
             --color-white: #ffffff;
             --font-heading: 'Playfair Display', serif;
             --font-body: 'Inter', sans-serif;
-            --radius-card: 20px;
+            --radius-card: 24px;
             --radius-btn: 60px;
-            --shadow-card: 0 8px 40px rgba(26, 58, 42, 0.08);
-            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow-card: 0 12px 50px rgba(26, 46, 31, 0.08);
+            --shadow-hover: 0 20px 70px rgba(200, 155, 107, 0.15);
+            --transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* ===== СБРОС И БАЗА ===== */
+        /* ============================================================
+           СБРОС И БАЗА
+           ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -47,7 +52,7 @@
             font-weight: 400;
             color: var(--color-text-primary);
             background: var(--color-bg);
-            line-height: 1.6;
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
@@ -69,130 +74,172 @@
             padding: 0 24px;
         }
 
-        /* ===== КОМПОНЕНТЫ ===== */
+        /* ============================================================
+           КОМПОНЕНТЫ
+           ============================================================ */
         .section {
-            padding: 80px 0;
+            padding: 90px 0;
         }
 
         .section--alt {
             background: var(--color-bg-alt);
         }
 
+        .section--gold-line {
+            position: relative;
+        }
+        .section--gold-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+        }
+
         .section__label {
             font-family: var(--font-body);
-            font-weight: 500;
-            font-size: 14px;
-            letter-spacing: 0.08em;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: var(--color-accent);
+            color: var(--color-gold);
             margin-bottom: 8px;
+            position: relative;
+            display: inline-block;
+        }
+        .section__label::after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            width: 20px;
+            height: 1px;
+            background: var(--color-gold-light);
         }
 
         .section__title {
             font-family: var(--font-heading);
             font-weight: 500;
-            font-size: clamp(32px, 5vw, 48px);
-            line-height: 1.2;
+            font-size: clamp(34px, 5.5vw, 52px);
+            line-height: 1.15;
             color: var(--color-text-primary);
             margin-bottom: 16px;
         }
 
-        .section__title span {
-            color: var(--color-accent);
+        .section__title .highlight {
+            color: var(--color-gold);
+            font-style: italic;
+            position: relative;
+        }
+        .section__title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--color-gold-light);
+            opacity: 0.4;
+            border-radius: 2px;
         }
 
         .section__subtitle {
             font-size: 18px;
             color: var(--color-text-secondary);
             max-width: 600px;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
+        /* ===== КНОПКИ ===== */
         .btn {
             display: inline-block;
-            padding: 16px 40px;
+            padding: 16px 42px;
             border-radius: var(--radius-btn);
             font-family: var(--font-body);
             font-weight: 500;
             font-size: 16px;
             border: none;
             cursor: pointer;
-            transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+            transition: all var(--transition);
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn--primary {
-            background: var(--color-accent);
+            background: var(--color-gold);
             color: var(--color-white);
-            box-shadow: 0 4px 20px rgba(193, 122, 79, 0.3);
+            box-shadow: 0 6px 30px rgba(200, 155, 107, 0.35);
         }
-
         .btn--primary:hover {
-            background: var(--color-accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(193, 122, 79, 0.4);
+            background: var(--color-gold-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 45px rgba(200, 155, 107, 0.5);
         }
-
-        .btn--primary:active {
-            transform: scale(0.97);
+        .btn--primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+        .btn--primary:hover::after {
+            opacity: 1;
         }
 
         .btn--outline {
             background: transparent;
             color: var(--color-text-primary);
-            border: 2px solid var(--color-accent);
+            border: 2px solid var(--color-gold);
         }
-
         .btn--outline:hover {
-            background: var(--color-accent);
+            background: var(--color-gold);
             color: var(--color-white);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(200, 155, 107, 0.3);
         }
 
-        /* ===== АНИМАЦИИ ПОЯВЛЕНИЯ ===== */
+        /* ===== АНИМАЦИИ ===== */
         .fade-up {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.9s ease, transform 0.9s ease;
         }
-
         .fade-up.visible {
             opacity: 1;
             transform: translateY(0);
         }
+        .fade-up--delay-1 { transition-delay: 0.1s; }
+        .fade-up--delay-2 { transition-delay: 0.2s; }
+        .fade-up--delay-3 { transition-delay: 0.3s; }
+        .fade-up--delay-4 { transition-delay: 0.4s; }
 
-        .fade-up--delay-1 {
-            transition-delay: 0.1s;
-        }
-        .fade-up--delay-2 {
-            transition-delay: 0.2s;
-        }
-        .fade-up--delay-3 {
-            transition-delay: 0.3s;
-        }
-        .fade-up--delay-4 {
-            transition-delay: 0.4s;
-        }
-
-        /* ===== НАВИГАЦИЯ ===== */
+        /* ============================================================
+           НАВИГАЦИЯ
+           ============================================================ */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 16px 0;
+            padding: 18px 0;
             background: transparent;
-            transition: background var(--transition), box-shadow var(--transition);
+            transition: all var(--transition);
         }
-
         .navbar--scrolled {
-            background: rgba(252, 249, 242, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 2px 20px rgba(26, 58, 42, 0.06);
+            background: rgba(252, 249, 242, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 2px 30px rgba(26, 46, 31, 0.06);
         }
-
         .navbar .container {
             display: flex;
             align-items: center;
@@ -200,34 +247,29 @@
             flex-wrap: wrap;
             gap: 16px;
         }
-
         .navbar__logo {
             font-family: var(--font-heading);
             font-weight: 600;
-            font-size: 22px;
+            font-size: 24px;
             color: var(--color-text-primary);
             letter-spacing: -0.02em;
         }
-
         .navbar__logo span {
-            color: var(--color-accent);
+            color: var(--color-gold);
         }
-
         .navbar__links {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 36px;
             list-style: none;
         }
-
         .navbar__links a {
             font-size: 15px;
-            font-weight: 400;
+            font-weight: 500;
             color: var(--color-text-secondary);
             transition: color var(--transition);
             position: relative;
         }
-
         .navbar__links a::after {
             content: '';
             position: absolute;
@@ -235,24 +277,20 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--color-accent);
+            background: var(--color-gold);
             transition: width var(--transition);
         }
-
         .navbar__links a:hover {
             color: var(--color-text-primary);
         }
-
         .navbar__links a:hover::after {
             width: 100%;
         }
-
         .navbar__cta {
             display: flex;
             align-items: center;
             gap: 16px;
         }
-
         .navbar__toggle {
             display: none;
             flex-direction: column;
@@ -262,7 +300,6 @@
             cursor: pointer;
             padding: 4px;
         }
-
         .navbar__toggle span {
             display: block;
             width: 28px;
@@ -271,97 +308,117 @@
             transition: var(--transition);
         }
 
-        /* ===== HERO ===== */
+        /* ============================================================
+           HERO
+           ============================================================ */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
-            padding: 100px 0 60px;
+            padding: 130px 0 70px;
             overflow: hidden;
             background: var(--color-bg);
         }
-
         .hero .container {
-            position: relative;
-            z-index: 2;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
         }
-
         .hero__content {
             padding: 20px 0;
         }
-
         .hero__badge {
             display: inline-block;
-            font-family: var(--font-body);
             font-weight: 500;
             font-size: 13px;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--color-accent);
-            background: rgba(193, 122, 79, 0.1);
-            padding: 6px 18px;
+            color: var(--color-gold);
+            background: rgba(200, 155, 107, 0.12);
+            padding: 6px 22px;
             border-radius: 60px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(200, 155, 107, 0.2);
         }
-
         .hero__title {
             font-family: var(--font-heading);
             font-weight: 500;
-            font-size: clamp(40px, 6vw, 68px);
-            line-height: 1.1;
+            font-size: clamp(42px, 6.5vw, 72px);
+            line-height: 1.08;
             color: var(--color-text-primary);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
-
-        .hero__title span {
-            color: var(--color-accent);
+        .hero__title .highlight {
+            color: var(--color-gold);
             font-style: italic;
+            position: relative;
         }
-
+        .hero__title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--color-gold-light);
+            opacity: 0.4;
+            border-radius: 3px;
+        }
         .hero__subtitle {
             font-size: 20px;
             color: var(--color-text-secondary);
-            max-width: 500px;
+            max-width: 480px;
             line-height: 1.7;
-            margin-bottom: 32px;
+            margin-bottom: 36px;
         }
-
         .hero__actions {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
         }
-
         .hero__image {
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         .hero__image img {
             width: 100%;
-            max-width: 480px;
-            height: auto;
+            max-width: 500px;
             border-radius: 32px;
-            box-shadow: 0 20px 60px rgba(26, 58, 42, 0.12);
+            box-shadow: 0 30px 80px rgba(26, 46, 31, 0.12);
             object-fit: cover;
             aspect-ratio: 3/4;
-            transition: transform 0.2s ease;
+            transition: transform 0.4s ease;
+        }
+        .hero__image img:hover {
+            transform: scale(1.02);
         }
 
-        /* ===== О НАТАЛЬЕ ===== */
+        /* ============================================================
+           О НАТАЛЬЕ (отдельное фото)
+           ============================================================ */
         .about__grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 70px;
             align-items: center;
         }
-
+        .about__image {
+            position: relative;
+        }
+        .about__image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--color-gold-light);
+            border-radius: 32px;
+            z-index: 0;
+        }
         .about__image img {
             width: 100%;
             max-width: 500px;
@@ -369,277 +426,362 @@
             box-shadow: var(--shadow-card);
             aspect-ratio: 4/5;
             object-fit: cover;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s ease;
         }
-
+        .about__image img:hover {
+            transform: scale(1.02);
+        }
         .about__content .section__title {
             margin-bottom: 20px;
         }
-
         .about__content p {
             font-size: 17px;
             color: var(--color-text-secondary);
-            line-height: 1.8;
-            margin-bottom: 16px;
+            line-height: 1.9;
+            margin-bottom: 18px;
         }
-
         .about__content p:last-child {
             margin-bottom: 0;
         }
-
         .about__highlights {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
-            margin-top: 24px;
+            gap: 20px;
+            margin-top: 30px;
         }
-
         .about__highlights-item {
             background: var(--color-white);
-            padding: 16px 20px;
-            border-radius: 12px;
+            padding: 20px 18px;
+            border-radius: 16px;
             text-align: center;
             box-shadow: var(--shadow-card);
+            border: 1px solid rgba(200, 155, 107, 0.1);
+            transition: all var(--transition);
         }
-
+        .about__highlights-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-gold-light);
+        }
         .about__highlights-item .number {
             font-family: var(--font-heading);
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 600;
-            color: var(--color-accent);
+            color: var(--color-gold);
         }
-
         .about__highlights-item .label {
             font-size: 14px;
             color: var(--color-text-secondary);
+            font-weight: 500;
         }
 
-        /* ===== УСЛУГИ ===== */
+        /* ============================================================
+           УСЛУГИ
+           ============================================================ */
         .services__grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 32px;
+            margin-top: 48px;
         }
-
         .service-card {
             background: var(--color-white);
-            padding: 32px 28px;
+            padding: 36px 28px;
             border-radius: var(--radius-card);
             box-shadow: var(--shadow-card);
-            transition: transform var(--transition), box-shadow var(--transition);
+            transition: all var(--transition);
             text-align: center;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
         }
-
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-gold-light), var(--color-gold), var(--color-gold-light));
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
         .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 50px rgba(26, 58, 42, 0.1);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-gold-light);
         }
-
+        .service-card:hover::before {
+            opacity: 1;
+        }
         .service-card__icon {
-            font-size: 40px;
-            margin-bottom: 16px;
+            font-size: 44px;
+            margin-bottom: 18px;
             display: block;
+            filter: drop-shadow(0 4px 12px rgba(200,155,107,0.2));
         }
-
         .service-card__title {
             font-family: var(--font-heading);
             font-weight: 500;
-            font-size: 22px;
-            margin-bottom: 10px;
+            font-size: 24px;
+            margin-bottom: 12px;
         }
-
         .service-card__desc {
             font-size: 15px;
             color: var(--color-text-secondary);
             line-height: 1.7;
         }
 
-        /* ===== ПРЕИМУЩЕСТВА ===== */
+        /* ============================================================
+           ПРИНЦИПЫ (теперь отрисованы красиво)
+           ============================================================ */
         .benefits__grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 32px;
+            margin-top: 48px;
         }
-
         .benefit-item {
+            background: var(--color-white);
+            padding: 32px 24px;
+            border-radius: var(--radius-card);
             text-align: center;
-            padding: 24px 16px;
+            box-shadow: var(--shadow-card);
+            transition: all var(--transition);
+            border: 1px solid transparent;
+            position: relative;
         }
-
+        .benefit-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-gold-light);
+        }
         .benefit-item__icon {
-            font-size: 36px;
-            margin-bottom: 12px;
-            display: block;
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 18px;
+            background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--color-white);
+            box-shadow: 0 8px 25px rgba(200, 155, 107, 0.25);
+            transition: transform 0.4s ease;
         }
-
+        .benefit-item:hover .benefit-item__icon {
+            transform: scale(1.08) rotate(-4deg);
+        }
         .benefit-item__title {
             font-family: var(--font-heading);
             font-weight: 500;
-            font-size: 20px;
-            margin-bottom: 6px;
+            font-size: 21px;
+            margin-bottom: 8px;
         }
-
         .benefit-item__desc {
             font-size: 15px;
             color: var(--color-text-secondary);
+            line-height: 1.6;
         }
 
-        /* ===== ОТЗЫВЫ ===== */
+        /* ============================================================
+           ОТЗЫВЫ
+           ============================================================ */
         .testimonials__grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 32px;
+            margin-top: 48px;
         }
-
         .testimonial-card {
             background: var(--color-white);
-            padding: 28px;
+            padding: 32px 28px;
             border-radius: var(--radius-card);
             box-shadow: var(--shadow-card);
+            transition: all var(--transition);
+            border-left: 4px solid var(--color-gold-light);
         }
-
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
         .testimonial-card__text {
             font-size: 16px;
             color: var(--color-text-secondary);
             line-height: 1.7;
             font-style: italic;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
+            position: relative;
+            padding-left: 20px;
         }
-
+        .testimonial-card__text::before {
+            content: '\201C';
+            font-family: var(--font-heading);
+            font-size: 48px;
+            color: var(--color-gold);
+            opacity: 0.2;
+            position: absolute;
+            left: -8px;
+            top: -12px;
+        }
         .testimonial-card__author {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
-
         .testimonial-card__author-avatar {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
-            background: var(--color-sage);
+            background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             color: var(--color-white);
-            font-weight: 500;
+            font-weight: 600;
         }
-
         .testimonial-card__author-name {
-            font-weight: 500;
+            font-weight: 600;
             font-size: 16px;
         }
-
         .testimonial-card__author-desc {
             font-size: 13px;
             color: var(--color-text-secondary);
         }
 
-        /* ===== КАК ЗАПИСАТЬСЯ ===== */
+        /* ============================================================
+           КАК ЗАПИСАТЬСЯ
+           ============================================================ */
         .steps__grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 32px;
+            margin-top: 48px;
         }
-
         .step-item {
             text-align: center;
-            padding: 24px 16px;
+            padding: 32px 20px;
             background: var(--color-white);
             border-radius: var(--radius-card);
             box-shadow: var(--shadow-card);
+            transition: all var(--transition);
+            position: relative;
         }
-
+        .step-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
         .step-item__number {
             font-family: var(--font-heading);
-            font-size: 48px;
+            font-size: 56px;
             font-weight: 600;
-            color: var(--color-accent);
-            opacity: 0.2;
+            color: var(--color-gold);
+            opacity: 0.15;
             line-height: 1;
             margin-bottom: 8px;
         }
-
+        .step-item__icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+            display: block;
+        }
         .step-item__title {
             font-family: var(--font-heading);
             font-weight: 500;
-            font-size: 20px;
+            font-size: 22px;
             margin-bottom: 6px;
         }
-
         .step-item__desc {
             font-size: 15px;
             color: var(--color-text-secondary);
         }
 
-        /* ===== CTA ===== */
+        /* ============================================================
+           CTA
+           ============================================================ */
         .cta-section {
             text-align: center;
-            padding: 80px 0;
-            background: var(--color-text-primary);
+            padding: 90px 0;
+            background: linear-gradient(135deg, var(--color-text-primary) 0%, #1f3a2a 100%);
             color: var(--color-white);
             border-radius: 40px;
             margin: 0 24px 80px;
+            position: relative;
+            overflow: hidden;
         }
-
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(200,155,107,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
         .cta-section .section__title {
             color: var(--color-white);
         }
-
         .cta-section .section__subtitle {
-            color: rgba(255, 255, 255, 0.7);
-            margin: 0 auto 32px;
+            color: rgba(255, 255, 255, 0.75);
+            margin: 0 auto 36px;
         }
-
         .cta-section .btn--primary {
-            background: var(--color-accent);
+            background: var(--color-gold);
             color: var(--color-white);
+            box-shadow: 0 8px 35px rgba(200, 155, 107, 0.4);
         }
-
         .cta-section .btn--primary:hover {
-            background: #d4895e;
+            background: #d4a87a;
+            box-shadow: 0 12px 50px rgba(200, 155, 107, 0.6);
         }
 
-        /* ===== ФУТЕР ===== */
+        /* ============================================================
+           ФУТЕР
+           ============================================================ */
         .footer {
-            padding: 40px 0 24px;
-            border-top: 1px solid var(--color-border);
+            padding: 48px 0 28px;
+            border-top: 1px solid rgba(200, 155, 107, 0.2);
         }
-
         .footer .container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
+            gap: 18px;
             text-align: center;
         }
-
         .footer__social {
             display: flex;
-            gap: 20px;
+            gap: 24px;
         }
-
         .footer__social a {
-            font-size: 24px;
+            font-size: 28px;
             color: var(--color-text-secondary);
-            transition: color var(--transition);
+            transition: all var(--transition);
+            line-height: 1;
         }
-
         .footer__social a:hover {
-            color: var(--color-accent);
+            color: var(--color-gold);
+            transform: translateY(-3px);
         }
-
         .footer__copy {
             font-size: 14px;
             color: var(--color-text-secondary);
+            opacity: 0.7;
         }
 
-        /* ===== АДАПТИВ ===== */
+        /* ============================================================
+           АДАПТИВ
+           ============================================================ */
         @media (max-width: 1024px) {
             .hero .container {
+                gap: 40px;
+            }
+            .about__grid {
                 gap: 40px;
             }
         }
@@ -649,23 +791,21 @@
                 display: none;
                 flex-direction: column;
                 width: 100%;
-                padding: 16px 0;
+                padding: 20px 0;
                 gap: 16px;
                 background: var(--color-bg);
-                border-radius: 16px;
+                border-radius: 20px;
                 box-shadow: var(--shadow-card);
+                margin-top: 12px;
             }
-
             .navbar__links--open {
                 display: flex;
             }
-
             .navbar__toggle {
                 display: flex;
             }
-
             .navbar__cta .btn {
-                padding: 10px 20px;
+                padding: 10px 22px;
                 font-size: 14px;
             }
 
@@ -673,44 +813,40 @@
                 min-height: auto;
                 padding: 120px 0 40px;
             }
-
             .hero .container {
                 grid-template-columns: 1fr;
                 gap: 30px;
                 text-align: center;
             }
-
             .hero__subtitle {
                 margin: 0 auto 32px;
             }
-
             .hero__actions {
                 justify-content: center;
             }
-
             .hero__image img {
-                max-width: 320px;
+                max-width: 340px;
             }
 
             .about__grid {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-
             .about__highlights {
                 justify-items: center;
+            }
+            .about__image::before {
+                display: none;
             }
 
             .section {
                 padding: 60px 0;
             }
-
             .cta-section {
                 margin: 0 16px 40px;
                 padding: 48px 24px;
                 border-radius: 24px;
             }
-
             .services__grid,
             .benefits__grid,
             .testimonials__grid,
@@ -724,7 +860,7 @@
 
         @media (max-width: 480px) {
             .hero__title {
-                font-size: 32px;
+                font-size: 34px;
             }
             .hero__subtitle {
                 font-size: 17px;
@@ -733,7 +869,7 @@
                 padding: 0 16px;
             }
             .section__title {
-                font-size: 28px;
+                font-size: 30px;
             }
             .btn {
                 padding: 14px 28px;
@@ -744,13 +880,16 @@
 </head>
 <body>
 
-    <!-- ===== НАВИГАЦИЯ ===== -->
+    <!-- ==========================================================
+    НАВИГАЦИЯ
+    ========================================================== -->
     <header class="navbar" id="navbar" role="navigation" aria-label="Главная навигация">
         <div class="container">
             <a href="#" class="navbar__logo">Наталья <span>Шестакова</span></a>
             <ul class="navbar__links" id="navLinks" role="menubar">
                 <li role="none"><a href="#about" role="menuitem">Обо мне</a></li>
                 <li role="none"><a href="#services" role="menuitem">Услуги</a></li>
+                <li role="none"><a href="#benefits" role="menuitem">Принципы</a></li>
                 <li role="none"><a href="#testimonials" role="menuitem">Отзывы</a></li>
                 <li role="none"><a href="#steps" role="menuitem">Как записаться</a></li>
             </ul>
@@ -763,13 +902,15 @@
         </div>
     </header>
 
-    <!-- ===== HERO ===== -->
+    <!-- ==========================================================
+    HERO (фото: natalia_hero.jpg)
+    ========================================================== -->
     <section class="hero" id="hero">
         <div class="container">
             <div class="hero__content">
                 <span class="hero__badge fade-up">Нутрициолог · Здоровое питание</span>
                 <h1 class="hero__title fade-up fade-up--delay-1">
-                    Наталья <span>Шестакова</span>
+                    Наталья <span class="highlight">Шестакова</span>
                 </h1>
                 <p class="hero__subtitle fade-up fade-up--delay-2">
                     Индивидуальный подход к вашему питанию и здоровью. Помогаю разобраться в рационе, восстановить энергию и достичь баланса.
@@ -780,23 +921,25 @@
                 </div>
             </div>
             <div class="hero__image fade-up fade-up--delay-4">
-                <!-- Фото Натальи (один файл на все случаи) -->
-                <img src="natali.jpg" alt="Наталья Шестакова — нутрициолог" />
+                <!-- Фото для героя (можно заменить на natalia_hero.jpg) -->
+                <img src="natalia_hero.jpg" alt="Наталья Шестакова — нутрициолог" />
             </div>
         </div>
     </section>
 
-    <!-- ===== О НАТАЛЬЕ ===== -->
-    <section class="section" id="about">
+    <!-- ==========================================================
+    ОБО МНЕ (фото: natalia_about.jpg — отдельное!)
+    ========================================================== -->
+    <section class="section section--alt" id="about">
         <div class="container">
             <div class="about__grid">
                 <div class="about__image fade-up">
-                    <!-- То же самое фото -->
-                    <img src="natali.jpg" alt="Наталья Шестакова" />
+                    <!-- Это фото используется ТОЛЬКО в этом разделе -->
+                    <img src="natalia_about.jpg" alt="Наталья Шестакова — нутрициолог, фото в работе" />
                 </div>
                 <div class="about__content fade-up">
                     <span class="section__label">Обо мне</span>
-                    <h2 class="section__title">Помогаю обрести <span>здоровье</span> через питание</h2>
+                    <h2 class="section__title">Помогаю обрести <span class="highlight">здоровье</span> через питание</h2>
                     <p>
                         Меня зовут Наталья Шестакова, я дипломированный нутрициолог. Моя миссия — помочь вам разобраться в том, что действительно нужно вашему организму, и выстроить систему питания, которая станет основой для здоровья, энергии и долголетия.
                     </p>
@@ -822,12 +965,14 @@
         </div>
     </section>
 
-    <!-- ===== УСЛУГИ ===== -->
-    <section class="section section--alt" id="services">
+    <!-- ==========================================================
+    УСЛУГИ
+    ========================================================== -->
+    <section class="section" id="services">
         <div class="container">
             <div class="fade-up" style="text-align:center; max-width:700px; margin:0 auto;">
                 <span class="section__label">Услуги</span>
-                <h2 class="section__title">Что я <span>предлагаю</span></h2>
+                <h2 class="section__title">Что я <span class="highlight">предлагаю</span></h2>
                 <p class="section__subtitle" style="margin:0 auto;">
                     Программы и консультации, адаптированные под ваши цели и образ жизни.
                 </p>
@@ -836,60 +981,54 @@
                 <div class="service-card fade-up fade-up--delay-1">
                     <span class="service-card__icon">🥗</span>
                     <h3 class="service-card__title">Индивидуальная консультация</h3>
-                    <p class="service-card__desc">
-                        Разбор вашего текущего рациона, анализов и образа жизни. Составление персонального плана питания.
-                    </p>
+                    <p class="service-card__desc">Разбор текущего рациона, анализов и образа жизни. Составление персонального плана питания.</p>
                 </div>
                 <div class="service-card fade-up fade-up--delay-2">
                     <span class="service-card__icon">📋</span>
                     <h3 class="service-card__title">Подбор рациона</h3>
-                    <p class="service-card__desc">
-                        Сбалансированное меню на основе ваших целей: снижение веса, набор энергии, улучшение пищеварения.
-                    </p>
+                    <p class="service-card__desc">Сбалансированное меню на основе ваших целей: снижение веса, набор энергии, улучшение пищеварения.</p>
                 </div>
                 <div class="service-card fade-up fade-up--delay-3">
                     <span class="service-card__icon">🧬</span>
                     <h3 class="service-card__title">Работа с анализами</h3>
-                    <p class="service-card__desc">
-                        Помогаю интерпретировать результаты лабораторных исследований и корректировать питание с учётом дефицитов.
-                    </p>
+                    <p class="service-card__desc">Помогаю интерпретировать результаты лабораторных исследований и корректировать питание с учётом дефицитов.</p>
                 </div>
                 <div class="service-card fade-up fade-up--delay-4">
                     <span class="service-card__icon">🌿</span>
                     <h3 class="service-card__title">Сопровождение</h3>
-                    <p class="service-card__desc">
-                        Поддержка на пути к здоровью: регулярные чекапы, корректировка плана, ответы на вопросы.
-                    </p>
+                    <p class="service-card__desc">Поддержка на пути к здоровью: регулярные чекапы, корректировка плана, ответы на вопросы.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== ПРЕИМУЩЕСТВА ===== -->
-    <section class="section" id="benefits">
+    <!-- ==========================================================
+    ПРИНЦИПЫ (теперь отрисованы красиво)
+    ========================================================== -->
+    <section class="section section--alt" id="benefits">
         <div class="container">
             <div class="fade-up" style="text-align:center; max-width:700px; margin:0 auto;">
                 <span class="section__label">Почему я</span>
-                <h2 class="section__title">Мои <span>принципы</span></h2>
+                <h2 class="section__title">Мои <span class="highlight">принципы</span></h2>
             </div>
             <div class="benefits__grid">
                 <div class="benefit-item fade-up fade-up--delay-1">
-                    <span class="benefit-item__icon">🎯</span>
+                    <div class="benefit-item__icon">🎯</div>
                     <h3 class="benefit-item__title">Индивидуальный подход</h3>
                     <p class="benefit-item__desc">Каждый план питания разрабатывается лично для вас, с учётом ваших целей, здоровья и образа жизни.</p>
                 </div>
                 <div class="benefit-item fade-up fade-up--delay-2">
-                    <span class="benefit-item__icon">🧪</span>
+                    <div class="benefit-item__icon">🧪</div>
                     <h3 class="benefit-item__title">Научная база</h3>
                     <p class="benefit-item__desc">Опираюсь на доказательную медицину и актуальные исследования в области нутрициологии.</p>
                 </div>
                 <div class="benefit-item fade-up fade-up--delay-3">
-                    <span class="benefit-item__icon">💬</span>
+                    <div class="benefit-item__icon">💬</div>
                     <h3 class="benefit-item__title">Поддержка 24/7</h3>
                     <p class="benefit-item__desc">Вы всегда можете написать мне в Telegram — я на связи и отвечаю на все вопросы.</p>
                 </div>
                 <div class="benefit-item fade-up fade-up--delay-4">
-                    <span class="benefit-item__icon">🌱</span>
+                    <div class="benefit-item__icon">🌱</div>
                     <h3 class="benefit-item__title">Без жёстких диет</h3>
                     <p class="benefit-item__desc">Помогаю внедрять здоровые привычки без стресса и ограничений, с учётом ваших предпочтений.</p>
                 </div>
@@ -897,12 +1036,14 @@
         </div>
     </section>
 
-    <!-- ===== ОТЗЫВЫ ===== -->
-    <section class="section section--alt" id="testimonials">
+    <!-- ==========================================================
+    ОТЗЫВЫ
+    ========================================================== -->
+    <section class="section" id="testimonials">
         <div class="container">
             <div class="fade-up" style="text-align:center; max-width:700px; margin:0 auto;">
                 <span class="section__label">Отзывы</span>
-                <h2 class="section__title">Что говорят <span>клиенты</span></h2>
+                <h2 class="section__title">Что говорят <span class="highlight">клиенты</span></h2>
             </div>
             <div class="testimonials__grid">
                 <div class="testimonial-card fade-up fade-up--delay-1">
@@ -945,26 +1086,31 @@
         </div>
     </section>
 
-    <!-- ===== КАК ЗАПИСАТЬСЯ ===== -->
-    <section class="section" id="steps">
+    <!-- ==========================================================
+    КАК ЗАПИСАТЬСЯ
+    ========================================================== -->
+    <section class="section section--alt" id="steps">
         <div class="container">
             <div class="fade-up" style="text-align:center; max-width:700px; margin:0 auto;">
                 <span class="section__label">Как записаться</span>
-                <h2 class="section__title">Три <span>простых шага</span></h2>
+                <h2 class="section__title">Три <span class="highlight">простых шага</span></h2>
             </div>
             <div class="steps__grid">
                 <div class="step-item fade-up fade-up--delay-1">
                     <div class="step-item__number">01</div>
+                    <span class="step-item__icon">✉️</span>
                     <h4 class="step-item__title">Напишите в Telegram</h4>
                     <p class="step-item__desc">Свяжитесь со мной через мессенджер, расскажите о своей ситуации.</p>
                 </div>
                 <div class="step-item fade-up fade-up--delay-2">
                     <div class="step-item__number">02</div>
+                    <span class="step-item__icon">💬</span>
                     <h4 class="step-item__title">Обсудим вашу цель</h4>
                     <p class="step-item__desc">Я задам вопросы, чтобы понять ваши задачи и подобрать оптимальный формат работы.</p>
                 </div>
                 <div class="step-item fade-up fade-up--delay-3">
                     <div class="step-item__number">03</div>
+                    <span class="step-item__icon">🌿</span>
                     <h4 class="step-item__title">Начнём консультацию</h4>
                     <p class="step-item__desc">Вы получите персональный план питания и рекомендации, а также постоянную поддержку.</p>
                 </div>
@@ -972,23 +1118,27 @@
         </div>
     </section>
 
-    <!-- ===== CTA ===== -->
+    <!-- ==========================================================
+    CTA (ПРИЗЫВ К ДЕЙСТВИЮ)
+    ========================================================== -->
     <section class="cta-section" id="cta">
         <div class="container">
-            <h2 class="section__title fade-up">Готовы начать путь к <span style="color: var(--color-accent);">здоровью</span>?</h2>
+            <h2 class="section__title fade-up">Готовы начать путь к <span style="color: var(--color-gold);">здоровью</span>?</h2>
             <p class="section__subtitle fade-up fade-up--delay-1">
                 Напишите мне в Telegram, и мы вместе подберём оптимальный план питания для ваших целей.
             </p>
             <div class="fade-up fade-up--delay-2">
                 <!-- ⚠️ ЗАМЕНИТЕ ССЫЛКУ НА РЕАЛЬНЫЙ ТЕЛЕГРАМ-АККАУНТ -->
-                <a href="https://t.me/your_username" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:18px; padding:18px 48px;">
+                <a href="https://t.me/your_username" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:18px; padding:18px 54px;">
                     Написать в Telegram
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- ===== ФУТЕР ===== -->
+    <!-- ==========================================================
+    ФУТЕР
+    ========================================================== -->
     <footer class="footer">
         <div class="container">
             <div class="footer__social">
@@ -1004,12 +1154,13 @@
     </footer>
 
     <script>
-        // ===== НАВИГАЦИЯ (скролл + мобильное меню) =====
+        // ==========================================================
+        // НАВИГАЦИЯ
+        // ==========================================================
         const navbar = document.getElementById('navbar');
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.getElementById('navLinks');
 
-        // Фикс навигации при скролле
         window.addEventListener('scroll', () => {
             if (window.scrollY > 60) {
                 navbar.classList.add('navbar--scrolled');
@@ -1018,13 +1169,11 @@
             }
         });
 
-        // Мобильное меню
         navToggle.addEventListener('click', () => {
             const isOpen = navLinks.classList.toggle('navbar__links--open');
             navToggle.setAttribute('aria-expanded', isOpen);
         });
 
-        // Закрытие меню при клике на ссылку
         document.querySelectorAll('.navbar__links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('navbar__links--open');
@@ -1032,31 +1181,31 @@
             });
         });
 
-        // ===== АНИМАЦИИ ПРИ СКРОЛЛЕ (Intersection Observer) =====
+        // ==========================================================
+        // АНИМАЦИИ ПРИ СКРОЛЛЕ
+        // ==========================================================
         const fadeElements = document.querySelectorAll('.fade-up');
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -40px 0px'
-        });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
         fadeElements.forEach(el => observer.observe(el));
 
-        // ===== ПАРАЛЛАКС ДЛЯ ИЗОБРАЖЕНИЯ В HERO (лёгкий эффект) =====
+        // ==========================================================
+        // ПАРАЛЛАКС ДЛЯ ФОТО В HERO (лёгкий эффект)
+        // ==========================================================
         const heroImage = document.querySelector('.hero__image img');
         if (heroImage) {
             window.addEventListener('scroll', () => {
                 const scrollY = window.scrollY;
-                const heroSection = document.querySelector('.hero');
-                const heroHeight = heroSection.offsetHeight;
+                const hero = document.querySelector('.hero');
+                const heroHeight = hero.offsetHeight;
                 if (scrollY < heroHeight) {
-                    const translateY = scrollY * 0.05; // небольшое смещение
+                    const translateY = scrollY * 0.04;
                     heroImage.style.transform = `translateY(${translateY}px)`;
                 }
             });
