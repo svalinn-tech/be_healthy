@@ -463,49 +463,54 @@
         }
 
         /* ============================================================
-           РЕЗУЛЬТАТЫ (круговые диаграммы с анимацией)
+           РЕЗУЛЬТАТЫ (тематические иконки вместо кругов)
            ============================================================ */
         .results__grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            gap: 32px;
             margin-top: 48px;
         }
-        .result-item { text-align: center; }
-        .result-item svg {
-            width: 140px;
-            height: 140px;
-            transform: rotate(-90deg);
-            margin-bottom: 16px;
+        .result-item {
+            background: var(--color-white);
+            padding: 32px 20px;
+            border-radius: var(--radius-card);
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            transition: all var(--transition);
+            border: 1px solid transparent;
         }
-        .result-item svg circle {
-            fill: none;
-            stroke-width: 12;
-            stroke-linecap: round;
+        .result-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-gold-light);
         }
-        .result-item .bg-circle {
-            stroke: var(--color-gold-light);
-            opacity: 0.3;
-        }
-        .result-item .progress-circle {
-            stroke: var(--color-gold);
-            stroke-dasharray: 377;
-            stroke-dashoffset: 377;
-            transition: stroke-dashoffset 1.5s ease;
-        }
-        .result-item .progress-circle.animated {
-            stroke-dashoffset: 0;
+        .result-item__icon {
+            font-size: 56px;
+            margin-bottom: 12px;
+            display: block;
+            line-height: 1;
         }
         .result-item .value {
             font-family: var(--font-heading);
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 600;
             color: var(--color-gold);
-            margin-top: 8px;
+            margin-bottom: 4px;
         }
         .result-item .label {
             font-size: 15px;
             color: var(--color-text-secondary);
+        }
+
+        /* Кнопка "Начать трансформацию" под результатами */
+        .results__cta {
+            text-align: center;
+            margin-top: 48px;
+        }
+        .results__cta .btn {
+            font-size: 18px;
+            padding: 18px 48px;
         }
 
         /* ============================================================
@@ -898,10 +903,6 @@
                 margin-left: auto;
                 margin-right: auto;
             }
-            .result-item svg {
-                width: 120px;
-                height: 120px;
-            }
             .faq-item__question {
                 font-size: 16px;
                 padding: 16px 20px;
@@ -914,6 +915,8 @@
             .container { padding: 0 16px; }
             .section__title { font-size: 30px; }
             .btn { padding: 14px 28px; font-size: 14px; }
+            .result-item__icon { font-size: 44px; }
+            .result-item .value { font-size: 28px; }
         }
     </style>
 </head>
@@ -1039,7 +1042,7 @@
     </section>
 
     <!-- ==========================================================
-    РЕЗУЛЬТАТЫ
+    РЕЗУЛЬТАТЫ (с тематическими иконками и кнопкой)
     ========================================================== -->
     <section class="section section--alt" id="results">
         <div class="container">
@@ -1050,37 +1053,29 @@
             </div>
             <div class="results__grid">
                 <div class="result-item fade-up fade-up--delay-1">
-                    <svg viewBox="0 0 140 140">
-                        <circle class="bg-circle" cx="70" cy="70" r="60" />
-                        <circle class="progress-circle animated" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="75" />
-                    </svg>
+                    <span class="result-item__icon">🥗</span>
                     <div class="value">80%</div>
                     <div class="label">улучшение пищеварения</div>
                 </div>
                 <div class="result-item fade-up fade-up--delay-2">
-                    <svg viewBox="0 0 140 140">
-                        <circle class="bg-circle" cx="70" cy="70" r="60" />
-                        <circle class="progress-circle animated" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="113" />
-                    </svg>
+                    <span class="result-item__icon">📉</span>
                     <div class="value">70%</div>
                     <div class="label">снижение веса (от 5 кг)</div>
                 </div>
                 <div class="result-item fade-up fade-up--delay-3">
-                    <svg viewBox="0 0 140 140">
-                        <circle class="bg-circle" cx="70" cy="70" r="60" />
-                        <circle class="progress-circle animated" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="38" />
-                    </svg>
+                    <span class="result-item__icon">⚡</span>
                     <div class="value">90%</div>
                     <div class="label">повышение энергии</div>
                 </div>
                 <div class="result-item fade-up fade-up--delay-4">
-                    <svg viewBox="0 0 140 140">
-                        <circle class="bg-circle" cx="70" cy="70" r="60" />
-                        <circle class="progress-circle animated" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="94" />
-                    </svg>
+                    <span class="result-item__icon">📊</span>
                     <div class="value">75%</div>
                     <div class="label">нормализация анализов</div>
                 </div>
+            </div>
+            <!-- Кнопка под результатами -->
+            <div class="results__cta fade-up fade-up--delay-5">
+                <a href="#cta" class="btn btn--primary">Начать трансформацию</a>
             </div>
         </div>
     </section>
@@ -1289,7 +1284,6 @@
                 Напишите мне в Telegram, и мы вместе подберём оптимальный план питания для ваших целей.
             </p>
             <div class="fade-up fade-up--delay-2">
-                <!-- Ссылка на Telegram аккаунт Натальи -->
                 <a href="https://t.me/shestakova_n" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:18px; padding:18px 54px;">
                     Написать в Telegram
                 </a>
@@ -1374,7 +1368,6 @@
             const icon = element.querySelector('.icon');
             const isOpen = answer.classList.contains('open');
 
-            // Закрываем все другие открытые ответы
             document.querySelectorAll('.faq-item__answer').forEach(a => {
                 if (a !== answer) {
                     a.classList.remove('open');
@@ -1390,31 +1383,6 @@
                 icon.classList.add('open');
             }
         }
-
-        // ===== АНИМАЦИЯ КРУГОВЫХ ДИАГРАММ (запускается при появлении) =====
-        const resultItems = document.querySelectorAll('.result-item');
-        const resultObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const circle = entry.target.querySelector('.progress-circle');
-                    if (circle) {
-                        circle.classList.add('animated');
-                    }
-                }
-            });
-        }, { threshold: 0.5 });
-
-        resultItems.forEach(item => resultObserver.observe(item));
-
-        // Принудительно запускаем анимацию для уже видимых элементов
-        setTimeout(() => {
-            document.querySelectorAll('.result-item .progress-circle').forEach(circle => {
-                const rect = circle.closest('.result-item').getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    circle.classList.add('animated');
-                }
-            });
-        }, 500);
     </script>
 
 </body>
